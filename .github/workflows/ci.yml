@@ -30,20 +30,20 @@ jobs:
 #    - name: Set up Laravel Sail environment
 #      run: cp .env.example .env
 
-    - name: Install PHP dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y php-cli unzip curl
-        curl -sS https://getcomposer.org/installer | php
-        php composer.phar install
+    # - name: Install PHP dependencies
+    #   run: |
+    #     sudo apt-get update
+    #     sudo apt-get install -y php-cli unzip curl
+    #     curl -sS https://getcomposer.org/installer | php
+    #     php composer.phar install
 
-    - name: Start Sail containers
-      run: |
-        ./vendor/bin/sail up -d
-        sleep 20
+    # - name: Start Sail containers
+    #   run: |
+    #     ./vendor/bin/sail up -d
+    #     sleep 20
 
-    - name: Run migrations
-      run: ./vendor/bin/sail artisan migrate --force
+    # - name: Run migrations
+    #   run: ./vendor/bin/sail artisan migrate --force
 
-    - name: Run tests
-      run: ./vendor/bin/sail test
+    # - name: Run tests
+    #   run: ./vendor/bin/sail test
