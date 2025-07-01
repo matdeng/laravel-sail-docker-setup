@@ -1,0 +1,49 @@
+name: Laravel Sail CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: sail
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+#    - name: Set up Laravel Sail environment
+#      run: cp .env.example .env
+
+    - name: Install PHP dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y php-cli unzip curl
+        curl -sS https://getcomposer.org/installer | php
+        php composer.phar install
+
+    - name: Start Sail containers
+      run: |
+        ./vendor/bin/sail up -d
+        sleep 20
+
+    - name: Run migrations
+      run: ./vendor/bin/sail artisan migrate --force
+
+    - name: Run tests
+      run: ./vendor/bin/sail test
