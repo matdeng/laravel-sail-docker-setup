@@ -11,7 +11,7 @@
         <aside class="w-64 bg-white shadow-md">
             <div class="p-4 text-lg font-bold border-b">Dashboard</div>
             <nav class="p-4 space-y-2">
-                <a href="/dashboard" class="block px-3 py-2 rounded hover:bg-gray-200">Home</a>
+                <a href="/dashboard" class="block px-3 py-2 rounded hover:bg-gray-200">Home Test CI</a>
                 <a href="/admin/users" class="block px-3 py-2 rounded hover:bg-gray-200">Users</a>
                 <a href="/settings" class="block px-3 py-2 rounded hover:bg-gray-200">Settings</a>
                 <!-- Add more links -->
