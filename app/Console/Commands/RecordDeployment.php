@@ -42,6 +42,6 @@ class RecordDeployment extends Command
             'migrations' => $migrations,
         ]);
 
-        $this->info('Deployment recorded successfully!');
+        $this->info("Deployment recorded for commit: $commit");
     }
 }
