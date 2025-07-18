@@ -19,11 +19,8 @@ class RecordDeployment extends Command
         // Get changed files
         $files = explode("\n", trim(shell_exec('git diff-tree --no-commit-id --name-only -r ' . $commit)));
 
-        // dd($files);
         // Get latest migration batch
         $latestBatch = DB::table('migrations')->max('batch');
-
-                // dd($latestBatch);
 
         $migrations = DB::table('migrations')
             ->where('batch', $latestBatch)
@@ -33,6 +30,10 @@ class RecordDeployment extends Command
         // Get user
         $user = $this->option('user') ?? get_current_user();
 
+        if (DeploymentLog::where('commit_hash', $commit)->exists()) {
+            $this->warn("Commit $commit already recorded. Skipping.");
+            return Command::SUCCESS;
+        }
         // Save to database
         DeploymentLog::create([
             'commit_hash' => $commit,
