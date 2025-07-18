@@ -14,4 +14,6 @@ class DeploymentLog extends Model
         'changed_files' => 'array',
         'migrations' => 'array',
     ];
+
+    protected $test = 'testt';
 }
